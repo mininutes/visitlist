@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <title>ANEKA SOTO</title>
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+
+            color: #FFFFFF;
+            width: 100%;
+            min-height: 100%;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+
+        }
+
+
+        body header {
+            background-color: transparent;
+            font-family: 'Oswald', sans-serif;
+            position: fixed;
+            display: block;
+            width: 100%;
+            height: 48px;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 90;
+        }
+
+        body header .header-inner {
+            padding: 12px 1.5%;
+        }
+
+        body header .header-inner .logo {
+            position: relative;
+            display: inline;
+            width: auto;
+            height: auto;
+            float: left;
+        }
+
+        body header .header-inner .logo a {
+            position: relative;
+            display: inline;
+            width: auto;
+            height: auto;
+            color: #FFFFFF;
+            outline: 0px none;
+            outline: 0px;
+            text-decoration: none;
+            transition: all 0.35s ease-in-out;
+            text-transform: uppercase;
+        }
+
+        body header .header-inner .logo a:hover {
+            color: rgba(255, 255, 255, 0.45);
+        }
+
+        body header .header-inner .logo a span {
+            font-weight: 700;
+        }
+
+        body header .header-inner nav {
+            position: relative;
+            display: inline;
+            margin: 0;
+            padding: 0;
+            list-type-style: none;
+            float: right;
+        }
+
+        body header .header-inner nav li {
+            position: relative;
+            display: inline;
+            margin-left: 16px;
+        }
+
+        body header .header-inner nav li a {
+            font-family: 'Oswald', sans-serif;
+            position: relative;
+            font-size: 13px;
+            color: #FFFFFF;
+            text-decoration: none;
+            line-height: 24px;
+            transition: all 0.35s ease-in-out;
+        }
+
+        body header .header-inner nav li a span {
+            position: relative;
+            z-index: 2;
+        }
+
+        body header .header-inner nav li a:hover {
+            color: rgba(255, 255, 255, 0.45);
+        }
+
+        body section.slideshow {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 100%;
+            height: 100vh;
+            margin: 0 auto;
+            visibility: hidden;
+            overflow: hidden;
+        }
+
+        body section.slideshow ul.navigation {
+            position: absolute;
+            display: block;
+            width: 640px;
+            height: 640px;
+            padding: 0;
+            margin: 0;
+            left: -230px;
+            top: 50%;
+            margin-top: -320px;
+            z-index: 10;
+        }
+
+        body section.slideshow ul.navigation li.navigation-item {
+            position: absolute;
+            display: inline-block;
+            overflow: hidden;
+            width: 120px;
+            height: 120px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: border 0.6s ease-in-out;
+        }
+
+        body section.slideshow ul.navigation li.navigation-item .rotate-holder {
+            position: fixed;
+            display: block;
+            width: 0;
+            height: 0;
+            left: -9999px;
+            top: -9999px;
+        }
+
+        body section.slideshow ul.navigation li.navigation-item .background-holder {
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            border-radius: 50%;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
+        }
+
+        body section.slideshow ul.navigation li.navigation-item:hover .background-holder {
+            opacity: 0.75;
+        }
+
+        body section.slideshow ul.navigation li.navigation-item.active .background-holder {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        body section.slideshow .detail {
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 8;
+        }
+
+        body section.slideshow .detail .detail-item {
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+
+        body section.slideshow .detail .detail-item .headline {
+            position: absolute;
+            display: block;
+            width: 100%;
+            max-width: calc(100% - 480px);
+            height: 126px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            overflow: visible;
+            white-space: nowrap;
+            box-sizing: border-box;
+            z-index: 2;
+        }
+
+        body section.slideshow .detail .detail-item .headline .letter {
+            font-family: 'Oswald', sans-serif;
+            position: relative;
+            display: inline-block;
+            opacity: 0;
+            visibility: hidden;
+            color: #FFFFFF;
+            font-size: 132px;
+            line-height: 110px;
+            font-weight: 900;
+            font-kerning: none;
+            white-space: nowrap;
+            box-sizing: border-box;
+            text-transform: uppercase;
+            font-size: 50px;
+        }
+
+        body section.slideshow .detail .detail-item .background {
+            position: absolute;
+            display: block;
+            width: 100%;
+            width: calc(100% + 100px);
+            height: 100%;
+            height: calc(100% + 100px);
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            overflow: visible;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            z-index: 1;
+        }
+
+        body section.slideshow .detail .detail-item .background::before {
+            content: "";
+            background: linear-gradient(to right, black 0%, rgba(0, 0, 0, 0) 90%);
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 2;
+
+        }
+
+        body section.slideshow .detail .detail-item.active {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <section class="slideshow">
+
+        <ul class="navigation">
+
+            <li class="navigation-item active">
+                <a href="https://www.youtube.com/watch?v=NiNfFtW4zCc" target="_blank">
+                    <span class="rotate-holder"></span>
+                    <span class="background-holder" style="background-image: url(assets/img/img2.jpg);"></span>
+                </a>
+            </li>
+
+            <li class="navigation-item">
+                <a href="https://www.youtube.com/watch?v=f0o6LVjCJHo" target="_blank">
+                    <span class="rotate-holder"></span>
+                    <span class="background-holder" style="background-image: url(assets/img/img1.jpg);"></span>
+                </a>
+            </li>
+
+            <li class="navigation-item">
+                <a href="https://www.youtube.com/watch?v=v28XYri5kYc" target="_blank">
+                    <span class="rotate-holder"></span>
+                    <span class="background-holder" style="background-image: url(assets/img/img3.jpg);"></span>
+                </a>
+            </li>
+
+            <li class="navigation-item">
+            <a href="https://www.youtube.com/watch?v=cjRLDeTTBrg" target="_blank">
+                    <span class="rotate-holder"></span>
+                    <span class="background-holder" style="background-image: url(assets/img/img4.jpeg);"></span>
+                </a>
+            </li>
+            <li class="navigation-item">
+                <a href="https://www.youtube.com/watch?v=F9bHrWM8uY8" target="_blank">
+                    <span class="rotate-holder"></span>
+                    <span class="background-holder" style="background-image: url(assets/img/img5.jpg);"></span>
+                </a>
+            </li>
+            <li class="navigation-item">
+                <a href="https://www.youtube.com/watch?v=w455PWacpOA" target="_blank">
+                    <span class="rotate-holder"></span>
+                    <span class="background-holder" style="background-image: url(assets/img/img6.jpg);"></span>
+                </a>
+            </li>
+            <li class="navigation-item">
+                <a href="https://www.youtube.com/watch?v=NPOp2nuJu8Y" target="_blank">
+                    <span class="rotate-holder"></span>
+                    <span class="background-holder" style="background-image: url(assets/img/img7.jpg);"></span>
+                </a>
+            </li>
+            <li class="navigation-item">
+                <a href="https://www.youtube.com/watch?v=fBvbL6lSm74" target="_blank">
+                    <span class="rotate-holder"></span>
+                    <span class="background-holder" style="background-image: url(assets/img/img8.jpg);"></span>
+                </a>
+            </li>
+            <li class="navigation-item">
+                <a href="https://www.youtube.com/watch?v=oJL5EYc9dv4" target="_blank">
+                    <span class="rotate-holder"></span>
+                    <span class="background-holder" style="background-image: url(assets/img/img9.jpg);"></span>
+                </a>
+            </li>
+
+        </ul>
+
+        <div class="detail">
+
+            <div class="detail-item active">
+                <a href="https://www.youtube.com/watch?v=NiNfFtW4zCc" target="_blank">
+                <div class="headline">SOTO BETAWI</div>
+                    <div class="background" style="background-image: url(assets/img/img2.jpg); height: 100vh;"></div>
+                    <div class="background"
+                        style="background-image: url(assets/img/img2.jpg); height: 100vh; background-size: cover; background-position: center;">
+                    </div>
+                </a>
+            </div>
+            <div class="detail-item">
+                <a href="https://www.youtube.com/watch?v=f0o6LVjCJHo" target="_blank">
+                    <div class="headline">SOTO MIE BOGOR</div>
+                    <div class="background" style="background-image: url(assets/img/img1.jpg);"></div>
+                </a>
+            </div>
+            <div class="detail-item">
+                <a href="https://www.youtube.com/watch?v=v28XYri5kYc" target="_blank">
+                    <div class="headline">SOTO GROMBYANG</div>
+                    <div class="background" style="background-image: url(assets/img/img3.jpg);"></div>
+                </a>
+            </div>
+            <div class="detail-item">
+                <a href="https://www.youtube.com/watch?v=cjRLDeTTBrg" target="_blank">
+                    <div class="headline">SOTO PADANG</div>
+                    <div class="background" style="background-image: url(assets/img/img4.jpeg);"></div>
+                </a>
+            </div>
+            <div class="detail-item">
+                <a href="https://www.youtube.com/watch?v=F9bHrWM8uY8" target="_blank">
+                    <div class="headline">SOTO BANDUNG</div>
+                    <div class="background" style="background-image: url(assets/img/img5.jpg);"></div>
+                </a>
+            </div>
+            <div class="detail-item">
+                <a href="https://www.youtube.com/watch?v=w455PWacpOA" target="_blank">
+                    <div class="headline">SOTO MADURA</div>
+                    <div class="background" style="background-image: url(assets/img/img6.jpg);"></div>
+                </a>
+            </div>
+            <div class="detail-item">
+                <a href="https://www.youtube.com/watch?v=NPOp2nuJu8Y" target="_blank">
+                    <div class="headline">SOTO MAKASSAR</div>
+                    <div class="background" style="background-image: url(assets/img/img7.jpg);"></div>
+                </a>
+            </div>
+            <div class="detail-item">
+                <a href="https://www.youtube.com/watch?v=fBvbL6lSm74" target="_blank">
+                    <div class="headline">SOTO LAMONGAN</div>
+                    <div class="background" style="background-image: url(assets/img/img8.jpg);"></div>
+                </a>
+            </div>
+            <div class="detail-item">
+                <a href="https://www.youtube.com/watch?v=oJL5EYc9dv4" target="_blank">
+                    <div class="headline">SOTO KUDUS</div>
+                    <div class="background" style="background-image: url(assets/img/img9.jpg);"></div>
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
+    <script src="https://unpkg.com/imagesloaded@4.1.4/imagesloaded.pkgd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/plugins/CSSPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/plugins/TextPlugin.min.js"></script>
+    <script src="assets/js/demo.js"></script>
+
+</body>
+
+</html>
